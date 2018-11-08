@@ -77,12 +77,15 @@ module.exports = {
       path : '/root/mygit/react-ssr',
       'ssh_options' : 'StrictHostKeyChecking=no',
       // 初始化前，可以在本地执行某些操作
-      'pre-setup': 'echo "准备初始化"',
+      'pre-setup': 'echo "本地准备初始化"',
       // 初始化前，可以在服务器执行某些操作
-      'post-setup': 'npm install',
+      'post-setup': 'echo "服务器准备初始化"',
       // 发版前，可以在本地执行某些操作
       'pre-deploy-local': 'echo "准备发版"',
-      // 发版前，可以在服务器执行某些操作
+      /**
+       * 发版前，可以在服务器执行某些操作
+       * pm2 reload必须指定 ecosystem.config.js，也就是指定 all 或者某个实例
+       */
       'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     }
   }
