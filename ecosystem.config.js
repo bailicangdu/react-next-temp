@@ -84,9 +84,9 @@ module.exports = {
       'pre-deploy-local': 'echo "准备发版"',
       /**
        * 发版前，可以在服务器执行某些操作
-       * pm2 reload必须指定 ecosystem.config.js，也就是指定 all 或者某个实例
+       * pm2 reload必须指定 ecosystem.config.js，否则必须指定 all 或者某个实例
        */
-      'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'git pull && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     }
   }
 };
