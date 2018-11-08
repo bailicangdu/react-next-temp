@@ -77,7 +77,7 @@ module.exports = {
       path : '/root/mygit/react-ssr',
       'ssh_options' : 'StrictHostKeyChecking=no',
       // 初始化前，可以在本地执行某些操作
-      'pre-setup': 'echo "本地准备初始化"',
+      'pre-setup': 'echo "本地准备初始化123"',
       // 初始化前，可以在服务器执行某些操作
       'post-setup': 'echo "服务器准备初始化"',
       // 发版前，可以在本地执行某些操作
