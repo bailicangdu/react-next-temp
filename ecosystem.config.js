@@ -16,7 +16,7 @@ module.exports = {
     // 入口文件
     script: 'server.js',
 
-    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    // 传递给script的参数
     args: 'one two',
     /**
      * 负载均衡，启动几个实例，默认 1，一般根据服务器是几核cpu决定
@@ -54,6 +54,8 @@ module.exports = {
 
   /**
    * 本地远程控制服务器的pm2更新代码，重启等操作
+   * 理解：pm2 deploy xxx 后 pm2会连接服务器，并执行本地配置文件的钩子
+   * 所以如果修改本地ecosystem.config.js，则会立即影响到部署结果，而不是远程 git pull 之后再执行
    * 可以配置多种类型，通常为production
    * 初始化：pm2 deploy production setup 初始化只需要执行一次，主要是初始化环境
    * 发布：pm2 deploy production
@@ -87,7 +89,7 @@ module.exports = {
        * pm2 reload必须指定 ecosystem.config.js，否则必须指定 all 或者某个实例
        * centos7 系统无法自动拉取代码，可以在钩子中主动执行
        */
-      'post-deploy' : 'git pull && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     }
   }
 };
