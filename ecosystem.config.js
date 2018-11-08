@@ -14,7 +14,7 @@ module.exports = {
      */
     name: 'react-ssr',
     // 入口文件
-    script: 'server/index.js',
+    script: 'server.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     args: 'one two',
@@ -48,7 +48,7 @@ module.exports = {
     env_production: {
       NODE_ENV: 'production',
       HOST: '0.0.0.0',
-      PORT: 8007,
+      PORT: 8008,
     }
   }],
 
@@ -61,7 +61,7 @@ module.exports = {
    * 回滚到上一个版本：pm2 deploy production revert 1
    * 远程执行某个命令：pm2 deploy production exec "pm2 reload all"
    * 列出所有发版提交：pm2 deploy production list
-   * 如果出现如下错误：push your changes before deploying，通常是因为服务端修改了代码，git认为必须提交后才能pull
+   * 如果出现如下错误：commit or stash your changes before deploying，通常是因为服务端修改了代码，git认为必须提交后才能pull
    * 则执行：pm2 deploy production --force
    */
   deploy : {
@@ -73,17 +73,18 @@ module.exports = {
       host : ['139.224.234.213'],
       port : '22',
       ref  : 'origin/master',
-      repo : 'git@github.com:bailicangdu/react-ssr.git',
+      repo : 'https://github.com/bailicangdu/react-ssr.git',
       path : '/root/mygit/react-ssr',
       'ssh_options' : 'StrictHostKeyChecking=no',
       // 初始化前，可以在本地执行某些操作
       'pre-setup': 'echo "准备初始化"',
       // 初始化前，可以在服务器执行某些操作
-      'post-setup': 'echo "服务器准备初始化"',
+      'post-setup': 'npm install',
       // 发版前，可以在本地执行某些操作
       'pre-deploy-local': 'echo "准备发版"',
       // 发版前，可以在服务器执行某些操作
-      'post-deploy' : 'npm install && pm2 reload --env production',
+      'post-deploy' : 'npm install && npm run build && pm2 reload --env production',
     }
   }
 };
+// /root/mygit/react-ssr/source/ecosystem.config.js 
