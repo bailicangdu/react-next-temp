@@ -57,7 +57,7 @@ module.exports = {
    * 可以配置多种类型，通常为production
    * 初始化：pm2 deploy production setup 初始化只需要执行一次，主要是初始化环境
    * 发布：pm2 deploy production
-   * 更新：pm2 deploy production update
+   * 更新：pm2 deploy production update 这个命令好像和上面的一样
    * 回滚到上一个版本：pm2 deploy production revert 1
    * 远程执行某个命令：pm2 deploy production exec "pm2 reload all"
    * 列出所有发版提交：pm2 deploy production list
@@ -91,4 +91,3 @@ module.exports = {
     }
   }
 };
-// /root/mygit/react-ssr/source/ecosystem.config.js 
