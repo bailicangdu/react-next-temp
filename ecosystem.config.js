@@ -73,7 +73,7 @@ module.exports = {
       host : ['139.224.234.213'],
       port : '22',
       ref  : 'origin/master',
-      repo : 'https://github.com/bailicangdu/react-ssr.git',
+      repo : 'git@github.com:bailicangdu/react-ssr.git',
       path : '/root/mygit/react-ssr',
       'ssh_options' : 'StrictHostKeyChecking=no',
       // 初始化前，可以在本地执行某些操作
