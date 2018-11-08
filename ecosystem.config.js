@@ -77,7 +77,7 @@ module.exports = {
       path : '/root/mygit/react-ssr',
       'ssh_options' : 'StrictHostKeyChecking=no',
       // 初始化前，可以在本地执行某些操作
-      'pre-setup': 'echo "本地准备初始化123"',
+      'pre-setup': 'echo "本地准备初始化"',
       // 初始化前，可以在服务器执行某些操作
       'post-setup': 'echo "服务器准备初始化"',
       // 发版前，可以在本地执行某些操作
@@ -85,8 +85,9 @@ module.exports = {
       /**
        * 发版前，可以在服务器执行某些操作
        * pm2 reload必须指定 ecosystem.config.js，否则必须指定 all 或者某个实例
+       * centos7 系统无法自动拉取代码，可以在钩子中主动执行
        */
-      'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'git pull && npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     }
   }
 };
