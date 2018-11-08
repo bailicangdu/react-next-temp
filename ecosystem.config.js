@@ -87,7 +87,7 @@ module.exports = {
       /**
        * 发版前，可以在服务器执行某些操作
        * pm2 reload必须指定 ecosystem.config.js，否则必须指定 all 或者某个实例
-       * centos7 系统无法自动拉取代码，可以在钩子中主动执行
+       * git 1.8 版本无法自动拉取代码，要使用1.8以上版本才可以
        */
       'post-deploy' : 'npm install && npm run build && pm2 reload ecosystem.config.js --env production',
     }
