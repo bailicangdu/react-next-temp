@@ -60,7 +60,7 @@ module.exports = {
    * 初始化：pm2 deploy production setup 初始化只需要执行一次，主要是初始化环境
    * 发布：pm2 deploy production
    * 更新：pm2 deploy production update 这个命令好像和上面的一样
-   * 回滚到上一个版本：pm2 deploy production revert 1
+   * 回滚到上一个版本：pm2 deploy production revert 1  回滚其实是根据git的版本回滚的
    * 远程执行某个命令：pm2 deploy production exec "pm2 reload all"
    * 列出所有发版提交：pm2 deploy production list
    * 如果出现如下错误：commit or stash your changes before deploying，通常是因为服务端修改了代码，git认为必须提交后才能pull
