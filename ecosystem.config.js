@@ -17,7 +17,7 @@ module.exports = {
     script: 'server.js',
 
     // 传递给script的参数
-    args: 'one two',
+    // args: 'one two',
     /**
      * 负载均衡，启动几个实例，默认 1，一般根据服务器是几核cpu决定
      * 如果设置为 'max'，则pm2会根据系统cpu核数设置最大的值
@@ -34,9 +34,9 @@ module.exports = {
      * error： 指 console.error
      * log： 所有日志
      */
-    output: './out.log',
-    error: './error.log',
-    log: './combined.outerr.log',
+    output: 'logs/out.log',
+    error: 'logs/error.log',
+    log: 'logs/combined.outerr.log',
     /**
      * 设置环境
      * 除了默认配置，其他所有配置都要遵循特有的格式: env_xxx

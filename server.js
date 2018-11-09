@@ -7,21 +7,23 @@ const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+// 修改server.js并不会触发next重新编译
 app.prepare()
   .then(() => {
     const server = new Koa()
     const router = new Router()
 
-    router.get('/a', async ctx => {
-      await app.render(ctx.req, ctx.res, '/a', ctx.query)
-      ctx.respond = false
-    })
+    // router.get('/a', async ctx => {
+    //   await app.render(ctx.req, ctx.res, '/a', ctx.query)
+    //   ctx.respond = false
+    // })
 
-    router.get('/b', async ctx => {
-      await app.render(ctx.req, ctx.res, '/b', ctx.query)
-      ctx.respond = false
-    })
+    // router.get('/b', async ctx => {
+    //   await app.render(ctx.req, ctx.res, '/b', ctx.query)
+    //   ctx.respond = false
+    // })
 
+    // 这个是默认路由配置，也就是写
     router.get('*', async ctx => {
       await handle(ctx.req, ctx.res)
       ctx.respond = false
