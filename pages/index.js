@@ -7,7 +7,7 @@ import '../style/index.less';
 class Home extends React.Component {
   static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err }) {
     // const testdata = await HomeApi.testssr({ type: 'guess' }, req && req.headers || {});
-    const city = await HomeApi.getCity({ type: 'group' });
+    const city = 'aaa';
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
     return { userAgent, city };
   }
