@@ -6,9 +6,9 @@ import '../style/index.less';
 
 class Home extends React.Component {
   static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err }) {
-    const testdata = await HomeApi.testssr({ type: 'guess' }, req && req.headers || {});
+    // const testdata = await HomeApi.testssr({ type: 'guess' }, req && req.headers || {});
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-    return { userAgent, testdata };
+    return { userAgent };
   }
   state = {
     city: {},
@@ -30,7 +30,7 @@ class Home extends React.Component {
         <p>scoped</p>
         {/*<img src="/static/images/test-img.jpg" className="test-img" alt=""/>*/}
         <div className="userAgent">{this.props.userAgent}</div>
-        <div className="city">{JSON.stringify(this.props.testdata)}</div>
+        {/*<div className="city">{JSON.stringify(this.props.testdata)}</div>*/}
       </div>
     );
   }
