@@ -3,7 +3,7 @@ module.exports = {
     "postcss-import": {},
     "postcss-url": {},
     'postcss-flexbugs-fixes': {},
-    "autoprefixer": {
+    "postcss-cssnext": {
       browsers: [
         '>1%',
         'last 4 versions',
@@ -11,8 +11,7 @@ module.exports = {
         'not ie < 9', 
         "iOS >= 8",
         "Android >= 4",
-      ],
-      flexbox: 'no-2009',
+      ]
     },
     "postcss-aspect-ratio-mini": {},
     "postcss-write-svg": { 

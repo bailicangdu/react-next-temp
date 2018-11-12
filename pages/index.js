@@ -1,32 +1,39 @@
-import cowsay from 'cowsay-browser';
-import Head from 'next/head';
+import React from 'react';
+import Layout from '../components/layout.js';
+import Link from 'next/link';
+import HomeApi from '../api/homeApi.js';
 import '../style/index.less';
 
-export default () =>
-  <div>
-    <Head>
-      <meta charset="utf-8"/>
-      <meta name="Description" content=""/>
-      <meta name="renderer" content="webkit"/>
-      <meta name="keywords" content=""/>
-      <meta name="apple-mobile-web-app-title" content=""/>
-      <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
-      <meta name="wap-font-scale" content="no"/>
-      <meta name="msapplication-tap-highlight" content="no"/>
-      <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
-      <meta name="full-screen" content="yes"/>
-      <meta name="screen-orientation" content="portrait"/>
-      <meta name="x5-fullscreen" content="true"/>
-      <meta name="x5-orientation" content="portrait"/>
-      <meta name="apple-mobile-web-app-capable" content="yes"/>
-      <meta name="format-detection" content="telephone=no, email=no, address=no"/>
-      <meta name="theme-color" content="#000000"/>
-      <meta http-equiv="x-dns-prefetch-control" content="on"/>
-      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-      <title>标题</title>
-    </Head>
-    Hello world
-    <p>scoped</p>
-    <img src="/static/images/test-img.jpg" className="test-img" alt=""/>
-    <div className="aa"></div>
-  </div>
+class Home extends React.Component {
+  static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err }) {
+    const testdata = await HomeApi.testssr({ type: 'guess' }, req && req.headers || {});
+    const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
+    return { userAgent, testdata };
+  }
+  state = {
+    city: {},
+  }
+  async initData() {
+    const city = await HomeApi.getCity({ type: 'guess' });
+    this.setState({
+      city,
+    })
+  }
+  componentDidMount() {
+    console.log(11111)
+    // this.initData();
+  }
+  render() {
+    return (
+      <div title="首页">
+        <Link href={{ pathname: '/about', query: { name: 'Zeit' } }} scroll={false} prefetch><a>about</a></Link>
+        <p>scoped</p>
+        {/*<img src="/static/images/test-img.jpg" className="test-img" alt=""/>*/}
+        <div className="userAgent">{this.props.userAgent}</div>
+        <div className="city">{JSON.stringify(this.props.testdata)}</div>
+      </div>
+    );
+  }
+}
+
+export default Home;

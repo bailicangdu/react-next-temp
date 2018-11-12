@@ -26,6 +26,7 @@
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
     "autoprefixer": "^9.3.1",
+    "axios": "^0.18.0",
     "cowsay-browser": "^1.1.8",
     "cssnano": "^4.1.7",
     "cssnano-preset-advanced": "^4.0.5",
@@ -33,6 +34,7 @@
     "koa-router": "^7.4.0",
     "less": "^3.8.1",
     "next": "^7.0.2",
+    "nprogress": "^0.2.0",
     "postcss-aspect-ratio-mini": "^0.0.2",
     "postcss-cssnext": "^3.1.0",
     "postcss-flexbugs-fixes": "^4.1.0",
