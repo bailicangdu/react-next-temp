@@ -7,7 +7,11 @@ import '../style/index.less';
 class Home extends React.Component {
   static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err }) {
     // const testdata = await HomeApi.testssr({ type: 'guess' }, req && req.headers || {});
-    const city = await HomeApi.getCity({ type: 'group' });
+    const cityObj = await HomeApi.getCity({ type: 'group' }, {}, Boolean(req));
+    let city = [];
+    Object.keys(cityObj).forEach((key) => {
+      city = city.concat(cityObj[key]);
+    });
     const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
     return { userAgent, city };
   }
@@ -31,7 +35,12 @@ class Home extends React.Component {
         <p>scoped</p>
         {/*<img src="/static/images/test-img.jpg" className="test-img" alt=""/>*/}
         <div className="userAgent">{this.props.userAgent}</div>
-        <div className="city">{JSON.stringify(this.props.city)}</div>
+        {
+          this.props.city.map((item, index) => {
+            return <span className="city" key={index}>{item.name}</span>
+          })
+        }
+        
       </div>
     );
   }

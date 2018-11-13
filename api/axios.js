@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { baseURL } from '../config/config.js';
+import { baseURLCs, baseUrlSs } from '../config/config.js';
 
 axios.jsonp = (_url, options = {}) => {
     const generateCallbackFunction = () => {
@@ -83,13 +83,19 @@ axios.jsonp = (_url, options = {}) => {
 }
 
 export default class Server {
-  axios(method, url, params, headers = {}) {
+  axios(method, url, params, headers = {}, serverside) {
     return new Promise((resolve, reject) => {
       if (typeof params !== 'object') params = {};
+      let baseURL = baseURLCs;
+      if (url.includes('//')) {
+        baseURL = '';
+      } else if (serverside) {
+        baseURL = baseUrlSs;
+      }
       const _option = {
         method,
         url,
-        baseURL: url.includes('//') ? '' : baseURL,
+        baseURL,
         timeout: 10000,
         params,
         data: null,
