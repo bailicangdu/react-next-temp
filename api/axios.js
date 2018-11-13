@@ -83,7 +83,7 @@ axios.jsonp = (_url, options = {}) => {
 }
 
 export default class Server {
-  axios(method, url, params, headers = {}, serverside) {
+  axios(method, url, params, headers = {}, serverside = false) {
     return new Promise((resolve, reject) => {
       if (typeof params !== 'object') params = {};
       let baseURL = baseURLCs;

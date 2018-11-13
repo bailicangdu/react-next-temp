@@ -4,13 +4,20 @@ import Link from 'next/link'
 import NProgress from 'nprogress'
 import Router from 'next/router'
 import Head from 'next/head';
+import '../style/base/base.less';
 
 Router.events.on('routeChangeStart', (url) => {
-  console.log(`Loading: ${url}`)
+  console.log(`开始切换路由: ${url}`)
   NProgress.start()
 })
-Router.events.on('routeChangeComplete', () => NProgress.done())
-Router.events.on('routeChangeError', () => NProgress.done())
+Router.events.on('routeChangeComplete', (url) => {
+  console.log(`路由切换完成: ${url}`)
+  NProgress.done();
+})
+Router.events.on('routeChangeError', (err) => {
+  console.log(`路由切换失败: ${err}`)
+  NProgress.done();
+})
 
 export default class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
@@ -21,6 +28,13 @@ export default class MyApp extends App {
     }
 
     return {pageProps}
+  }
+
+  // 捕捉组件错误信息，所有子组件的信息都可以捕获到
+  componentDidCatch (error, errorInfo) {
+    console.log('任何组件发生错误都可以捕获，错误信息：', error)
+    // This is needed to render errors correctly in development / production
+    super.componentDidCatch(error, errorInfo)
   }
 
   render () {
@@ -52,12 +66,11 @@ export default class MyApp extends App {
           <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui" />
         </Head>
         <div>
-          <Link href='/'><a>Home</a></Link>
-          <Link href='/about'><a>About</a></Link>
-          <Link href='/forever'><a>Forever</a></Link>
-          <Link href='/non-existing'><a>Non Existing Page</a></Link>
+          <Link href='/'><a> Home </a></Link>
+          <Link href='/about'><a> About </a></Link>
+          <Link href='/forever'><a> Forever </a></Link>
+          <Link href='/non-existing'><a> Non Existing Page </a></Link>
         </div>
-
         <Component {...pageProps} />
       </Container>
     )
