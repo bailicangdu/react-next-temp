@@ -10,10 +10,11 @@ import { connect } from 'react-redux';
 class Home extends React.Component {
   static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err, store, isServer }) {
     try {
-      const testdata = await HomeApi.testssr({ 
-        type: 'guess',
-        headers: req && req.headers,
-      });
+      const testdata = {} 
+      // await HomeApi.testssr({ 
+      //   type: 'guess',
+      //   headers: req && req.headers,
+      // });
       const cityObj = await HomeApi.getCity({ type: 'hot' });
       let city = [];
       Object.keys(cityObj).forEach((key) => {
