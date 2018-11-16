@@ -4,7 +4,15 @@ import Link from 'next/link'
 import NProgress from 'nprogress'
 import Router from 'next/router'
 import Head from 'next/head';
-import '../style/base/base.less';
+import { Provider } from 'react-redux';
+import withRedux from 'next-redux-wrapper';
+import '../styles/base/base.less';
+import initStore from '../redux/store';
+
+interface AppProps {
+  [key: string]: any,
+}
+
 
 Router.events.on('routeChangeStart', (url) => {
   console.log(`开始切换路由: ${url}`)
@@ -19,15 +27,18 @@ Router.events.on('routeChangeError', (err) => {
   NProgress.done();
 })
 
-export default class MyApp extends App {
+class MyApp extends App <AppProps, any> {
   static async getInitialProps ({ Component, router, ctx }) {
-    let pageProps = {}
+    // let pageProps = {}
 
-    if (Component.getInitialProps) {
-      pageProps = await Component.getInitialProps(ctx)
+    // if (Component.getInitialProps) {
+    //   pageProps = await Component.getInitialProps(ctx)
+    // }
+
+    // return {pageProps}
+     return {
+      pageProps: (Component.getInitialProps ? await Component.getInitialProps(ctx) : {})
     }
-
-    return {pageProps}
   }
 
   // 捕捉组件错误信息，所有子组件的信息都可以捕获到
@@ -38,7 +49,7 @@ export default class MyApp extends App {
   }
 
   render () {
-    const {Component, pageProps} = this.props
+    const {Component, pageProps, store} = this.props
     return (
       <Container>
         {/*
@@ -71,8 +82,13 @@ export default class MyApp extends App {
           <Link href='/forever'><a> Forever </a></Link>
           <Link href='/non-existing'><a> Non Existing Page </a></Link>
         </div>
-        <Component {...pageProps} />
+        <Provider store={store}>
+          <Component {...pageProps} />
+        </Provider>
       </Container>
     )
   }
 }
+
+
+export default withRedux(initStore)(MyApp);

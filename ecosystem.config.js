@@ -1,7 +1,8 @@
 module.exports = {
   apps : [{
     name: 'react-ssr',
-    script: 'server.js',
+    script: 'server/index.js',
+    args: '',
     instances: 1 ,
     autorestart: true,
     watch: false,

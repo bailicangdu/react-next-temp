@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { baseURLCs, baseUrlSs } from '../config/config.js';
+import getConfig from 'next/config';
 
 axios.jsonp = (_url, options = {}) => {
     const generateCallbackFunction = () => {
@@ -83,26 +84,27 @@ axios.jsonp = (_url, options = {}) => {
 }
 
 export default class Server {
-  axios(method, url, params, headers = {}, serverside = false) {
+  axios(url, params, method = 'get') {
     return new Promise((resolve, reject) => {
+      const {serverRuntimeConfig, publicRuntimeConfig} = getConfig();
+      const envConifg = Object.assign(publicRuntimeConfig, serverRuntimeConfig);
       if (typeof params !== 'object') params = {};
-      let baseURL = baseURLCs;
-      if (url.includes('//')) {
-        baseURL = '';
-      } else if (serverside) {
-        baseURL = baseUrlSs;
+      let headers = {};
+      if (params.headers) {
+        headers = params.headers;
+        delete params.headers;
       }
       const _option = {
         method,
         url,
-        baseURL,
+        baseURL: envConifg.apiHost,
         timeout: 10000,
         params,
         data: null,
         headers,
         withCredentials: true, //是否携带cookies发起请求
         validateStatus: (status) => {
-            return status >= 200 && status < 300;
+          return status >= 200 && status < 300;
         },
       }
       if (method.toLowerCase() === 'jsonp') {
