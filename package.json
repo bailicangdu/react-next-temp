@@ -1,7 +1,7 @@
 {
-  "name": "react-ssr",
+  "name": "react-next-temp",
   "version": "1.0.0",
-  "description": "react-ssr",
+  "description": "react-next-temp",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon server/index.js",
@@ -14,7 +14,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bailicangdu/react-ssr.git"
+    "url": "git+https://github.com/bailicangdu/react-next-temp.git"
   },
   "keywords": [
     "react",
@@ -23,9 +23,9 @@
   "author": "cangdu",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/bailicangdu/react-ssr/issues"
+    "url": "https://github.com/bailicangdu/react-next-temp/issues"
   },
-  "homepage": "https://github.com/bailicangdu/react-ssr#readme",
+  "homepage": "https://github.com/bailicangdu/react-next-temp#readme",
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-typescript": "^1.1.1",

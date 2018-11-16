@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'react-ssr',
+    name: 'react-next-temp',
     script: 'server/index.js',
     args: '',
     instances: 1 ,
@@ -26,8 +26,8 @@ module.exports = {
       host : ['139.224.234.213'],
       port : '22',
       ref  : 'origin/master',
-      repo : 'git@github.com:bailicangdu/react-ssr.git',
-      path : '/root/mygit/react-ssr',
+      repo : 'git@github.com:bailicangdu/react-next-temp.git',
+      path : '/root/mygit/react-next-temp',
       'ssh_options' : 'StrictHostKeyChecking=no',
       'pre-setup': 'echo "本地准备初始化"',
       'post-setup': 'echo "服务器准备初始化"',
