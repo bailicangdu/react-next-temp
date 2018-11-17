@@ -1,0 +1,2 @@
+!server/*/__tests__/**/*.js
+!api/*/demo/*

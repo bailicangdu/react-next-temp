@@ -10,8 +10,8 @@ import { connect } from 'react-redux';
 class Home extends React.Component {
   static async getInitialProps({ pathname, query, asPath, req, res, jsonPageRes, err, store, isServer }) {
     try {
-      const testdata = {} 
-      // await HomeApi.testssr({ 
+      const testdata = {}
+      // await HomeApi.testssr({
       //   type: 'guess',
       //   headers: req && req.headers,
       // });
@@ -21,13 +21,12 @@ class Home extends React.Component {
         city = city.concat(cityObj[key]);
       });
       const userAgent = req ? req.headers['user-agent'] : navigator.userAgent
-      // 
+      //
       store.dispatch(testAdd(store.getState().testReducer.count))
       // console.log(getConfig());
       return { userAgent, city, testdata };
     } catch (e) {
       console.log(e);
-      return {};
     }
   }
   constructor(props) {

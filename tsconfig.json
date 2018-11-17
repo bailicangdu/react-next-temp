@@ -22,5 +22,6 @@
     ],
     "lib": [ "dom", "es2015", "es2016", "es2017"]
   },
-  "include": ["./pages/**/*", "./components/**/*", "./api/**/*"]
+  "include": ["./pages/**/*", "./components/**/*", "./api/**/*"],
+  "exclude": ["node_modules"],
 }

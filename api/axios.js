@@ -87,7 +87,8 @@ export default class Server {
   axios(url, params, method = 'get') {
     return new Promise((resolve, reject) => {
       const {serverRuntimeConfig, publicRuntimeConfig} = getConfig();
-      const envConifg = Object.assign(publicRuntimeConfig, serverRuntimeConfig);
+      console.log(serverRuntimeConfig, publicRuntimeConfig)
+      const envConifg = Object.assign({}, publicRuntimeConfig, serverRuntimeConfig);
       if (typeof params !== 'object') params = {};
       let headers = {};
       if (params.headers) {
