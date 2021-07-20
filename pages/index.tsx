@@ -15,6 +15,19 @@ class Home extends React.Component {
       //   type: 'guess',
       //   headers: req && req.headers,
       // });
+      const graphqlData = await HomeApi.graphql({
+        query: `query {
+          users {
+            _id
+            name
+            city
+          }
+          admin(id: "5bf2b528aebcf56d8b9ca749") {
+            _id
+            name
+          }
+        }`
+      });
       const cityObj = await HomeApi.getCity({ type: 'hot' });
       let city = [];
       Object.keys(cityObj).forEach((key) => {
@@ -24,7 +37,7 @@ class Home extends React.Component {
       //
       store.dispatch(testAdd(store.getState().testReducer.count))
       // console.log(getConfig());
-      return { userAgent, city, testdata };
+      return { userAgent, city, testdata, graphqlData };
     } catch (e) {
       console.log(e);
     }
@@ -68,9 +81,9 @@ class Home extends React.Component {
       throw new Error('I crashed!')
     }
     console.log('render');
-    const { city = [], testdata = '', userAgent = '', count, testcount } = this.props;
+    const { city = [], testdata = '', userAgent = '', count, testcount, graphqlData = {} } = this.props;
     return (
-      <div title="首页">
+      <main title="首页" className="main">
         <Link href={{ pathname: '/about', query: { name: 'Zeit' } }} scroll={false} prefetch><a>about</a></Link>
         <Link href={{ pathname: '/a', query: { name: 'a' } }}><a> a </a></Link>
         <Link href={{ pathname: '/b', query: { name: 'b' } }}><a> b </a></Link>
@@ -88,7 +101,8 @@ class Home extends React.Component {
         {process.env.NODE_ENV}
         {process.env.BACKEND_URL}
         {process.env.BACKEND_URL}
-      </div>
+        {JSON.stringify(graphqlData)}
+      </main>
     );
   }
 }

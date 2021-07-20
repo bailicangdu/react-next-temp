@@ -14,7 +14,6 @@ const ssrCache = new LRUCache({
   maxAge: 1000 * 60 * 60 // 1hour
 })
 
-// 修改server.js并不会触发next重新编译
 app.prepare()
   .then(() => {
     const server = new Koa()
